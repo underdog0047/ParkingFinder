@@ -92,7 +92,7 @@ public class ParkingFinder
 		// Finds the minimum distance by calculating distance to each spot
 		int closestDistance = Math.min( calculateDistance(carX, carY, spot4),                                                            // minimum from last min and spot4
 		                                Math.min(calculateDistance(carX, carY, spot3),                                                   // minimum from last min and spot3
-										         Math.min(calculateDistance(carX, carY, spot2), calculateDistance(carX, carY, spot1)))); // gets minimun distance of spot1 or spot2
+			                                 Math.min(calculateDistance(carX, carY, spot2), calculateDistance(carX, carY, spot1)))); // gets minimun distance of spot1 or spot2
 
 		System.out.println("\nThe distance to the closest spot is:  " + closestDistance);
 
