@@ -21,15 +21,13 @@ public class ParkingFinder
 		scan = new Scanner(System.in);
 
 		// Get Random seed from user
-		System.out.println("\nEnter a random seed:");
-		System.out.print(">>  ");
+		System.out.print("\nEnter your random seed:  ");
 		seed = scan.nextLong();
 
 		rand = new Random(seed);    // initilize random object with user's seed
 
 		// Get parking time from user
-		System.out.println("How long do you plan to be parked? (in minutes)");
-		System.out.print(">>  ");
+		System.out.print("How long do you plan to be parked? (in minutes):  ");
 		parkingTime = scan.nextInt();
 
 		// Generae car's random location, (x and y values)
@@ -59,11 +57,8 @@ public class ParkingFinder
 		System.out.println("The closest spot is:  " +
 		                   getClosestSpot(CAR_X, CAR_Y, spotOne, spotTwo, spotThree, spotFour) + "\n");
 
-
-
 	}
 	// Support Methods
-
 
 	private static int calculateDistance(int carX, int carY, ParkingSpot spot) {
 	    // Returns the distance from cars location to spot using Manhattan Geometry
@@ -88,20 +83,28 @@ public class ParkingFinder
 
 	private static ParkingSpot getClosestSpot(int carX, int carY, ParkingSpot spot1, ParkingSpot spot2, ParkingSpot spot3, ParkingSpot spot4) {
 		ParkingSpot closestSpot;
+		int distanceToSpotOne, distanceToSpotTwo;
+		int distanceToSpotThree, distanceToSpotFour;
+
+		// Calculate and store the distance to each spot
+		distanceToSpotOne = calculateDistance(carX, carY, spot1);
+		distanceToSpotTwo = calculateDistance(carX, carY, spot2);
+		distanceToSpotThree = calculateDistance(carX, carY, spot3);
+		distanceToSpotFour = calculateDistance(carX, carY, spot4);
 
 		// Finds the minimum distance by calculating distance to each spot
-		int closestDistance = Math.min( calculateDistance(carX, carY, spot4),                                                            // minimum from last min and spot4
-		                                Math.min(calculateDistance(carX, carY, spot3),                                                   // minimum from last min and spot3
-										         Math.min(calculateDistance(carX, carY, spot2), calculateDistance(carX, carY, spot1)))); // gets minimun distance of spot1 or spot2
+		int closestDistance = Math.min(distanceToSpotFour,                                 // minimum from last min and spot4
+		                               Math.min(distanceToSpotThree,                       // minimum from last min and spot3
+									   Math.min(distanceToSpotTwo, distanceToSpotOne)));   // minimum either spot2 or spot1
 
 		System.out.println("\nThe distance to the closest spot is:  " + closestDistance);
 
 		// Checks which spot distance matches the closest distance
-		if (closestDistance == calculateDistance(carX, carY, spot1)) {
+		if (closestDistance == distanceToSpotOne) {
 			closestSpot = spot1;
-		} else if (closestDistance == calculateDistance(carX, carY, spot2)) {
+		} else if (closestDistance == distanceToSpotTwo) {
 			closestSpot = spot2;
-		} else if (closestDistance == calculateDistance(carX, carY, spot3)) {
+		} else if (closestDistance == distanceToSpotThree) {
 			closestSpot = spot3;
 		} else {
 			closestSpot = spot4;
